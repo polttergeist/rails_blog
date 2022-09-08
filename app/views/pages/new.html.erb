@@ -1,0 +1,25 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>create.</title>
+	</head>
+
+	<body>
+		<h1>create an article.</h1>
+		<%= link_to 'link to home.', root_path %>
+
+		<%= form_for @article do |f| %>
+			<p>
+  			<%= f.label :title %>
+  			<%= f.text_field :title %>
+ 			</p>
+ 			<p>
+  			<%= f.label :description %><br>
+  			<%= f.text_area :description %>
+ 			</p>
+ 			<p>
+  			<%= f.submit %>
+ 			</p>
+		<% end %>
+	</body>
+</html>

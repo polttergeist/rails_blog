@@ -1,0 +1,1 @@
+<%= link_to 'Back', articles_path, class: "btn btn-xs btn-success center" %>
