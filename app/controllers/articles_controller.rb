@@ -15,13 +15,6 @@ class ArticlesController < ApplicationController
       end
 
       format.xml do 
-=begin
-        xml_response = {articles: []}
-        @articles.each do |article|
-          xml_response[:articles].append({title: article.title, description: article.description})
-        end
-        render xml: xml_response.to_xml
-=end
         render template: "index"
       end
     end
@@ -30,8 +23,6 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
   end
-
-  # just a comment
 
   def create
     @article = Article.new(article_params)
@@ -56,7 +47,6 @@ class ArticlesController < ApplicationController
       end
 
       format.xml do 
-        # render xml: @article.to_json
         render template: "show"
       end
     end
