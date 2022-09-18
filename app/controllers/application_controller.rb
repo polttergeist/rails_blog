@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
 
  	def handle_request
  		req = RequestHandler.new(remote_ip: request.remote_ip, request_method: request.method, request_url: request.url)
- 		yield
+		# binding.irb
+		yield
  		req.response_status = response.status
  		req.response_content_type = response.content_type.nil? ? "none" : response.content_type
  		req.save

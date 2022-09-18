@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   	get 'login', to: 'sessions#new'
   	post 'login', to: 'sessions#create'
 	delete 'logout', to: 'sessions#destroy'
+
+  scope 'api/v1' do
+    resources :articles, controller: 'api/v1/formats', as: :formats
+	end
 end
