@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -6,11 +7,6 @@ Rails.application.routes.draw do
   	root "pages#index"
   	get "about", to: "pages#about"
   	resources :articles
-  	get 'signup', to: 'users#new'
-  	resources :users, except: [:new]
-  	get 'login', to: 'sessions#new'
-  	post 'login', to: 'sessions#create'
-	delete 'logout', to: 'sessions#destroy'
 
   scope 'api/v1' do
     resources :articles, controller: 'api/v1/formats', as: :formats

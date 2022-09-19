@@ -67,3 +67,25 @@ $navbar-default-bg: black;
  border-top: 1px solid #eaeaea;
  margin-top: 15px;
 }
+
+.nav button {
+ color: white;
+ background-color: black;
+}
+
+.nav form {
+ text-align: center;
+}
+
+.navbar-nav {
+ display: flex;
+ align-items: center;
+}
+
+#naughty .navbar-link {
+ color: white;
+}
+
+.navbar-brand {
+ background-color: black;
+}

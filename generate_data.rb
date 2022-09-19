@@ -1,5 +1,4 @@
 require 'faker'
-require_relative 'app/models/user'
 require_relative 'app/models/article'
 
 5.times do
