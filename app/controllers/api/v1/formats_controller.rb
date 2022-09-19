@@ -1,6 +1,8 @@
 module Api
   module V1
 class FormatsController < ApplicationController
+  protect_from_forgery with: :null_session
+  #skip_forgery_protection
   before_action :set_article, only: [:update, :show, :destroy]
 
   def index
@@ -47,10 +49,11 @@ class FormatsController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = User.find(session[:user_id])
+    @article.user = current_user
+    @article.user_id = 1 if @article.user_id.nil?
     if @article.save
       # 200 response
-      redirect_to article_path(@article), format: request_format
+      head :ok
     else
       # error
       head :bad_request
@@ -59,18 +62,21 @@ class FormatsController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to article_path(@article)
+      head :ok
     else
       head :bad_request
     end
   end
 
   def destroy
-    @article.destroy
-    redirect_to articles_path, format: request_format
+    head :ok if @article.destroy
   end
 
   private
+
+  def article_params
+    params.require(:article).permit(:title, :description)
+  end
 
   def set_article
     @article = Article.find(params[:id])
