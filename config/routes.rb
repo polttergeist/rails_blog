@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   	root "pages#index"
   	get "about", to: "pages#about"
-  	resources :articles
+		get "articles/search", to: "articles#search"
+  	resources :articles, except: %i[search]
 
   scope 'api/v1' do
     resources :articles, controller: 'api/v1/formats', as: :formats

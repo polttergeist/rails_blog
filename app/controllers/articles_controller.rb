@@ -27,6 +27,13 @@ class ArticlesController < ApplicationController
   def edit
   end
 
+  def search
+    snippet = params[:search]
+    @results = Article.where('title LIKE ?', '%'+snippet+'%').or(Article.where('description LIKE ?', '%'+snippet+'%'))
+    @results = @results.paginate(page: params[:page], per_page: 5)
+    render 'articles/results'
+  end
+
   def destroy
     @article.destroy
     redirect_to articles_path
