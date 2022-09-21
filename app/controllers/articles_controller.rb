@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
   def search
     snippet = params[:search]
     @results = Article.where('title LIKE ?', '%'+snippet+'%').or(Article.where('description LIKE ?', '%'+snippet+'%'))
+    @count = @results.count
     @results = @results.paginate(page: params[:page], per_page: 5)
     render 'articles/results'
   end
