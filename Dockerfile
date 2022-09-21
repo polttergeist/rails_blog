@@ -4,9 +4,11 @@
 FROM ruby:3.1.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /blog
-COPY Gemfile* .
+COPY Gemfile /blog/Gemfile
+COPY Gemfile.lock /blog/Gemfile.lock
+RUN gem install bundler -v 2.3.7
 RUN bundle install
-COPY . .
-EXPOSE 3000
+COPY entrypoint.sh /bin/
+RUN chmod +x /bin/entrypoint.sh
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["entrypoint.sh"]
