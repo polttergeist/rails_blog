@@ -1,5 +1,5 @@
-require 'faker'
-require_relative 'app/models/article'
+require "faker"
+require_relative "app/models/article"
 
 5.times do
   u = User.new(username: Faker::Name.unique.first_name, email: Faker::Internet.unique.email, password: Faker::Internet.password)

@@ -4,12 +4,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  	root "pages#index"
-  	get "about", to: "pages#about"
-		get "articles/search", to: "articles#search"
-  	resources :articles, except: %i[search]
+  root "pages#index"
+  get "about", to: "pages#about"
+  get "articles/search", to: "articles#search"
+  resources :articles, except: %i[search]
 
-  scope 'api/v1' do
-    resources :articles, controller: 'api/v1/formats', as: :formats
-	end
+  scope "api/v1" do
+    resources :articles, controller: "api/v1/formats", as: :formats
+  end
 end
