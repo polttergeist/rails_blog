@@ -8,26 +8,28 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Noveo Blog", root_path, class: "navbar-brand", id: "logo" %>
+      <%= button_to "Noveo Blog", root_path, class: "navbar-brand", id: "logo", method: :get %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Articles", articles_path %></li>
-        <li><%= link_to "Create new article", new_article_path %></li>
-        <li><%= link_to "My Github", "https://github.com/polttergeist/noveo_ruby" %></li>
+        <li class="navbar-text"><%= button_to "Articles", articles_path, method: :get %></li>
+        <li class="navbar-text"><%= button_to "Create new article", new_article_path, method: :get %></li>
+        <li class="navbar-text"><%= button_to "My Github", "https://github.com/polttergeist/noveo_ruby", method: :get %></li>
       </ul>
       
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'About', about_path %></li>
-        <% if logged_in? %>
-          <li><%= button_to "Log out", logout_path, method: :delete %></li>
+      <ul class="nav navbar-nav navbar-right" id="naughty">
+        <% if user_signed_in? %>
+          <li class="navbar-text"><span style="color: white">Logged in as <strong><%= current_user.email %></strong>.</span></li>
+          <li class="navbar-text"><%= button_to 'Edit profile', edit_user_registration_path, method: :get, :class => 'navbar-link' %></li>
+          <li class="navbar-text"><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
         <% else %>
-          <li><%= link_to "Log in", login_path %></li>
-          <li><%= link_to "Sign up", signup_path %></li>
+          <li class="navbar-text"><%= button_to "Sign up", new_user_registration_path, method: :get, :class => 'navbar-link'  %></li>
+          <li class="navbar-text"><%= button_to "Login", new_user_session_path, method: :get, :class => 'navbar-link'  %></li>
         <% end %>
+        <li class="navbar-text"><%= button_to 'About', about_path, method: :get %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
