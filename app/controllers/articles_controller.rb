@@ -3,21 +3,6 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.paginate(page: params[:page], per_page: 5)
-    respond_to do |format|
-      format.html
-
-      format.pdf do
-        render pdf: "file_name", template: "articles/index", formats: [:html]
-      end
-
-      format.json do
-        render template: "index"
-      end
-
-      format.xml do 
-        render template: "index"
-      end
-    end
   end
 
   def new
@@ -26,7 +11,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     if @article.save
       flash[:success] = "Article was successfully created"
       redirect_to article_path(@article)
@@ -36,24 +21,18 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
 
-      format.pdf do
-        render pdf: "file_name", template: "articles/show", formats: [:html]
-      end
-
-      format.json do
-        render template: "show"
-      end
-
-      format.xml do 
-        render template: "show"
-      end
-    end
   end
 
   def edit
+  end
+
+  def search
+    snippet = params[:search]
+    @results = Article.where('title LIKE ?', '%'+snippet+'%').or(Article.where('description LIKE ?', '%'+snippet+'%'))
+    @count = @results.count
+    @results = @results.paginate(page: params[:page], per_page: 5)
+    render 'articles/results'
   end
 
   def destroy
