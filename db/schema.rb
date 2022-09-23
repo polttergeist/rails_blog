@@ -14,9 +14,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_223643) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["title", "description"], name: "index_articles_on_title_and_description"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
@@ -42,4 +42,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_223643) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end
