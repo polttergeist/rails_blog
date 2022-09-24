@@ -12,7 +12,6 @@ AllCops:
     - node_modules/**/*
     - public/**/*
     - vendor/**/*
-    - 'app/controllers/articles_controller.rb'
 
 Rails:
   Enabled: true # enable rubocop-rails cops
@@ -25,3 +24,6 @@ Bundler/DuplicatedGem:
 
 Layout/EndOfLine:
    Enabled: False
+
+Rails/I18nLocaleTexts:
+  Enabled: False
