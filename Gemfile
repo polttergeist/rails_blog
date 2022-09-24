@@ -54,6 +54,7 @@ gem "will_paginate", "3.3.1"
 gem "bootstrap-will_paginate", "1.0.0"
 gem "devise"
 gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "master"
+gem "pry-rails", group: :development
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

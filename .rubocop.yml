@@ -12,9 +12,6 @@ AllCops:
     - node_modules/**/*
     - public/**/*
     - vendor/**/*
-    - 'app/controllers/articles_controller.rb'
-    - 'app/models/user.rb'
-    - 'db/migrate/20220910230938_add_timestamp_to_articles.rb'
 
 Rails:
   Enabled: true # enable rubocop-rails cops
@@ -27,3 +24,6 @@ Bundler/DuplicatedGem:
 
 Layout/EndOfLine:
    Enabled: False
+
+Rails/I18nLocaleTexts:
+  Enabled: False

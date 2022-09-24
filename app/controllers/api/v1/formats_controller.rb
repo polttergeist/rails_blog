@@ -1,13 +1,11 @@
 module Api
   module V1
     class FormatsController < ApplicationController
-      protect_from_forgery with: :null_session
-      # skip_forgery_protection
+      skip_forgery_protection
       before_action :set_article, only: [:update, :show, :destroy]
 
       def index
         @articles = Article.paginate(page: params[:page], per_page: 5)
-        # binding.irb
         respond_to do |format|
           format.html do
             render template: "index", formats: [:json]
@@ -49,27 +47,23 @@ module Api
 
       def create
         @article = Article.new(article_params)
-        @article.user = current_user
-        @article.user_id = 1 if @article.user_id.nil?
-        if @article.save
-          # 200 response
-          head :ok
-        else
-          # error
-          head :bad_request
-        end
+        @article.save ? head(:created) : head(:bad_request)
       end
 
       def update
-        if @article.update(article_params)
-          head :ok
+        if @article.user_id.nil?
+          @article.update(article_params) ? head(:ok) : head(:bad_request)
         else
-          head :bad_request
+          head :unauthorized
         end
       end
 
       def destroy
-        head :ok if @article.destroy
+        if @article.user_id.nil?
+          @article.destroy ? head(:ok) : head(:bad_request)
+        else
+          head :unauthorized
+        end
       end
 
       private
